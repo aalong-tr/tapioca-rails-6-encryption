@@ -1,24 +1,12 @@
-# README
+# Bug Reproduction: `uninitialized constant ActiveRecord::Encryption` on Rails 6.1
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This directory contains a minimally modified Rails 6.1 application with a single trivial model class. On the initial commit, `srb tc` passes. On the subsequent commit, which adds a trivial model, attempting to run `tapioca dsl` fails with the error:
 
-Things you may want to cover:
+```
+bundler: failed to load command: tapioca (/Users/drew/.rbenv/versions/3.1.4/bin/tapioca)
+/Users/drew/.rbenv/versions/3.1.4/lib/ruby/gems/3.1.0/gems/tapioca-0.14.3/lib/tapioca/dsl/helpers/active_record_column_type_helper.rb:72:in `type_for_activerecord_value': NameError: uninitialized constant ActiveRecord::Encryption (Parallel::UndumpableException)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+          when ActiveRecord::Encryption::EncryptedAttributeType
+                           ^^^^^^^^^^^^
+Did you mean?  Exception
+```
